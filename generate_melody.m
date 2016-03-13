@@ -30,7 +30,7 @@ Ts = 1/Fs;
 
 
 %loads the given .mat file
-load melody3.mat;
+load melody1.mat;
 
 %duration of a unit note length (default - 0.5)
 noteLength = 0.5;
@@ -68,7 +68,12 @@ for n = notes
     timeMark = timeMark + (dur * noteLength) * Fs;
 end
 
-soundsc(melody, Fs);
+%soundsc(melody, Fs);
+tTotal = 0:Ts:totalSec;
+%plot(tTotal, melody(1, 1:1.5*Fs + 1));
+plot(tTotal, melody);
+
+audiowrite('test1.wav', melody, Fs);
 
 
 end
