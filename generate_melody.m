@@ -1,3 +1,10 @@
+%   Benjamin Hoertnagl-Pereira
+%   bhoertn1@jhu.edu
+%   
+%   Signals and Systems
+%   Project 1
+%       Part 1 - Melody Creation
+
 function [] = generate_melody(filename)
 %generate_melody - creates a melody from an array of notes and durations
 %   The function takes in the name of a .mat file (containing a notes
@@ -25,6 +32,9 @@ Ts = 1/Fs;
 %loads the given .mat file
 load melody3.mat;
 
+%duration of a unit note length (default - 0.5)
+noteLength = 0.5;
+
 
 
 %total duration of piece in seconds
@@ -32,7 +42,7 @@ totalSec = 0;
 for sec = score
     totalSec = totalSec + sec;
 end 
-totalSec = totalSec * 0.5;
+totalSec = totalSec * noteLength;
 
 %the signal array for melody, initializing
 melody = zeros(1, Fs * totalSec);
@@ -42,7 +52,7 @@ timeMark = 1;
 %iterate through each note
 for n = notes
     dur = score(i);
-    t = 0:Ts:dur * .5;
+    t = 0:Ts:dur * noteLength;
     
     freq = noteFreq(char(n));
 
@@ -55,7 +65,7 @@ for n = notes
     i = i + 1;
     
     %updates the current time marker in melody
-    timeMark = timeMark + (dur * 0.5) * Fs;
+    timeMark = timeMark + (dur * noteLength) * Fs;
 end
 
 soundsc(melody, Fs);
