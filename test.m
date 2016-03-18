@@ -1,9 +1,17 @@
+%   Benjamin Hoertnagl-Pereira
+%   bhoertn1@jhu.edu
+%   
+%   Signals and Systems
+%   Project 1
+%       Part 2 - Melody Enrichment (Volume Variation)
+
+
 %the set of notes
-noteSet = {'A3b', 'A3', 'B3b', 'B3', 'C3', 'D3b', 'D3', 'E3b', 'E3', 'F3', 'G3b', 'G3', 'A4b',...
+noteSet = {'A3', 'B3b', 'B3', 'C3', 'D3b', 'D3', 'E3b', 'E3', 'F3', 'G3b', 'G3', 'A4b',...
     'A4', 'B4b', 'B4', 'C4', 'D4b', 'D4', 'E4b', 'E4', 'F4', 'G4b', 'G4', 'A5b', '-'};
 
 %the set of frequencies associated with the respective notes
-freqSet = [220*2.^(-1/12), 220*2.^(0/12), 220*2.^(1/12), 220*2.^(2/12), 220*2.^(3/12), 220*2.^(4/12), 220*2.^(5/12), 220*2.^(6/12), 220*2.^(7/12), 220*2.^(8/12), 220*2.^(9/12), 220*2.^(10/12), 220*2.^(11/12),...
+freqSet = [220*2.^(0/12), 220*2.^(1/12), 220*2.^(2/12), 220*2.^(3/12), 220*2.^(4/12), 220*2.^(5/12), 220*2.^(6/12), 220*2.^(7/12), 220*2.^(8/12), 220*2.^(9/12), 220*2.^(10/12), 220*2.^(11/12),...
     220*2.^(12/12), 220*2.^(13/12), 220*2.^(14/12), 220*2.^(15/12), 220*2.^(16/12), 220*2.^(17/12), 220*2.^(18/12), 220*2.^(19/12), 220*2.^(20/12), 220*2.^(21/12), 220*2.^(22/12), 220*2.^(23/12), 0];    
 
 %lookup table for frequencey of given note
@@ -20,7 +28,7 @@ Ts = 1/Fs;
 load melody1.mat;
 
 %duration of a unit note length (default - 0.5)
-noteLength = 0.5;
+noteLength = 0.25;
 
 
 
@@ -45,10 +53,18 @@ for n = notes
 
     y = sin(freq*2*pi*t);
     
-    melody(1, timeMark:timeMark + size(t, 2) - 1) = y;
+    %enrichment, ADSR
+    a = linspace(0, 1, 0.1*dur * noteLength*Fs);
+    d = linspace(1, 0.8, 0.15*dur * noteLength*Fs);
     
-    %ADSR scaling
+    %need to account for extra +1 sample
+    s = 0.8*ones(1, 0.6*dur * noteLength*Fs + 1);    %linspace(0.8, 0.8, 0.6*dur * noteLength*Fs);
     
+    r = linspace(0.8, 0, 0.15*dur * noteLength*Fs);
+    enrich = [a d s r];
+    %
+    
+    melody(1, timeMark:timeMark + size(t, 2) - 1) = y.* enrich;
 
     
     %updates counter for index in score array
@@ -65,3 +81,4 @@ plot(tTotal, melody);
 
 audiowrite('test1.wav', melody, Fs);
 
+soundsc(melody, Fs)
