@@ -46,10 +46,9 @@ i = 1;
 timeMark = 1;
 %iterate through each note
 for n = notes
-    char(n)
     dur = score(i);
     t = 0:Ts:dur * noteLength;
-    dur
+
     
     freq = noteFreq(char(n));
 

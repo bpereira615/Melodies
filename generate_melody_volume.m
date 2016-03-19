@@ -6,11 +6,11 @@
 %       Part 2 - Melody Enrichment (Volume Variation)
 
 function [] = generate_melody_volume( filename )
-%generate_melody_volume - creates a melody from an array of notes and
-%durations, and enriches the melody via ADSR volume variation
-%   The function takes in the name of a .mat file (containing a notes
-%   and score array), generates the corresonding melody and adds volume
-%   variation to enrich the sound, and saves the output melody as a .wav file.
+%generate_melody_volume - creates a melody from an array of notes 
+%   and durations. The function takes in the name of a .mat file 
+%   (containing a notes and score array), generates the corresonding 
+%   melody and adds an ADSR enrichment, and saves the output melody 
+%   as a .wav file.
 
 %the set of notes
 noteSet = {'A3', 'B3b', 'B3', 'C3', 'D3b', 'D3', 'E3b', 'E3', 'F3', 'G3b', 'G3', 'A4b',...
@@ -31,7 +31,7 @@ Ts = 1/Fs;
 
 
 %loads the given .mat file
-load melody2.mat;
+load filename;
 
 %duration of a unit note length (default - 0.5)
 noteLength = 0.25;
@@ -54,6 +54,7 @@ timeMark = 1;
 for n = notes
     dur = score(i);
     t = 0:Ts:dur * noteLength;
+
     
     freq = noteFreq(char(n));
 
@@ -63,8 +64,14 @@ for n = notes
     a = linspace(0, 1, 0.1*dur * noteLength*Fs);
     d = linspace(1, 0.8, 0.15*dur * noteLength*Fs);
     
-    %need to account for extra +1 sample
-    s = 0.8*ones(1, 0.6*dur * noteLength*Fs + 1);    %linspace(0.8, 0.8, 0.6*dur * noteLength*Fs);
+    %need to account for extra +1 sample,
+    %round function to prevent error: size inputs must be integers
+    %TODO: fix weird corner case for following durations
+    if dur == 1.5 || dur == 0.75
+        s = 0.8*ones(1, round(0.6*dur * noteLength*Fs) + 3);    
+    else
+        s = 0.8*ones(1, round(0.6*dur * noteLength*Fs) + 1);    
+    end
     
     r = linspace(0.8, 0, 0.15*dur * noteLength*Fs);
     enrich = [a d s r];
@@ -88,7 +95,6 @@ plot(tTotal, melody);
 audiowrite('test1.wav', melody, Fs);
 
 soundsc(melody, Fs)
-
 
 
 end
