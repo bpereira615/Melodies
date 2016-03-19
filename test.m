@@ -25,7 +25,7 @@ Ts = 1/Fs;
 
 
 %loads the given .mat file
-load melody1.mat;
+load melody3.mat;
 
 %duration of a unit note length (default - 0.5)
 noteLength = 0.25;
@@ -46,8 +46,10 @@ i = 1;
 timeMark = 1;
 %iterate through each note
 for n = notes
+    char(n)
     dur = score(i);
     t = 0:Ts:dur * noteLength;
+    dur
     
     freq = noteFreq(char(n));
 
@@ -57,8 +59,14 @@ for n = notes
     a = linspace(0, 1, 0.1*dur * noteLength*Fs);
     d = linspace(1, 0.8, 0.15*dur * noteLength*Fs);
     
-    %need to account for extra +1 sample
-    s = 0.8*ones(1, 0.6*dur * noteLength*Fs + 1);    %linspace(0.8, 0.8, 0.6*dur * noteLength*Fs);
+    %need to account for extra +1 sample,
+    %round function to prevent error: size inputs must be integers
+    %TODO: fix weird corner case for following durations
+    if dur == 1.5 || dur == 0.75
+        s = 0.8*ones(1, round(0.6*dur * noteLength*Fs) + 3);    
+    else
+        s = 0.8*ones(1, round(0.6*dur * noteLength*Fs) + 1);    
+    end
     
     r = linspace(0.8, 0, 0.15*dur * noteLength*Fs);
     enrich = [a d s r];

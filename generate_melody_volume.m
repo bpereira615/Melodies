@@ -31,7 +31,7 @@ Ts = 1/Fs;
 
 
 %loads the given .mat file
-load melody1.mat;
+load melody2.mat;
 
 %duration of a unit note length (default - 0.5)
 noteLength = 0.25;
