@@ -33,7 +33,7 @@ Ts = 1/Fs;
 
 
 %loads the given .mat file
-load filename;
+load (filename);
 
 %duration of a unit note length (default - 0.5)
 noteLength = 0.5;
@@ -56,7 +56,6 @@ timeMark = 1;
 for n = notes
     dur = score(i);
     t = 0:Ts:dur * noteLength;
-    char(n)
     
     freq = noteFreq(char(n));
     

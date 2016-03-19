@@ -1,0 +1,23 @@
+Benmin Hoertnagl-Pereira
+bhoertn1
+631-488-7197 
+bhoertn1@jhu.edu
+
+520.214.01 EE214 Signals and Systems
+Project 1 - Melody Creation and Enrichment
+
+Files:
+Scripts-
+	test.m  - simple driver to test various functions
+	generate_melody.m - script that reads given melody .mat file, creates a vector
+		representation of the melody, and saves the output as a .wav file
+	genearte_melody_volue.m - script with similar functionality to generate_melody,
+		enriches audio using ADSR technique (volume variation)
+	genearte_melody_harmonics.m - script with similar functionality to generate_melody,
+		enriches audio using harmonics of given pitch
+
+.mat-
+	melody1.mat - Fur Elise
+	melody2.mat - Hey Jude
+	melody3.mat - Star Wars, Imperial March Theme
+	

@@ -30,7 +30,7 @@ Ts = 1/Fs;
 
 
 %loads the given .mat file
-load filename;
+load(filename);
 
 %duration of a unit note length (default - 0.5)
 noteLength = 0.5;

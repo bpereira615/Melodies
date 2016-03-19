@@ -12,7 +12,7 @@ function [] = generate_melody_volume( filename )
 %   melody and adds an ADSR enrichment, and saves the output melody 
 %   as a .wav file.
 
-filename = 'melody1.mat';
+
 %the set of notes
 noteSet = {'A3', 'B3b', 'B3', 'C3', 'D3b', 'D3', 'E3b', 'E3', 'F3', 'G3b', 'G3', 'A4b',...
     'A4', 'B4b', 'B4', 'C4', 'D4b', 'D4', 'E4b', 'E4', 'F4', 'G4b', 'G4', 'A5b', '-'};
@@ -32,7 +32,7 @@ Ts = 1/Fs;
 
 
 %loads the given .mat file
-load filename;
+load (filename);
 
 %duration of a unit note length (default - 0.5)
 noteLength = 0.5;
