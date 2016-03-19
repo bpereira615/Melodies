@@ -33,7 +33,7 @@ Ts = 1/Fs;
 load filename;
 
 %duration of a unit note length (default - 0.5)
-noteLength = 0.25;
+noteLength = 0.5;
 
 
 
@@ -73,7 +73,9 @@ tTotal = 0:Ts:totalSec;
 %plot(tTotal, melody(1, 1:1.5*Fs + 1));
 plot(tTotal, melody);
 
-audiowrite('test1.wav', melody, Fs);
+
+outfile = strcat(filename(1:7), '.wav');
+audiowrite(outfile, melody, Fs);
 
 soundsc(melody, Fs)
 
