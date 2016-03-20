@@ -74,6 +74,14 @@ for n = notes
     y = y / max(abs(y));
     
     
+    %plot the first note
+    if (i == 1)
+        figure;
+        hold on;grid on   
+        title('generate melody harmonics: First Note') 
+        xlabel('Time (sec)')
+        plot(t, y, '-b')
+    end
     
     melody(1, timeMark:timeMark + size(t, 2) - 1) = y;
 
@@ -88,12 +96,18 @@ end
 %soundsc(melody, Fs);
 tTotal = 0:Ts:totalSec;
 %plot(tTotal, melody(1, 1:1.5*Fs + 1));
-plot(tTotal, melody);
+figure;
+hold on;grid on   
+title('generate melody harmonics: Melody') 
+xlabel('Time (sec)')
+plot(tTotal, melody, '-b')
+
+
 
 outfile = strcat(filename(1:7), 'Rich.wav');
 audiowrite(outfile, melody, Fs);
 
-soundsc(melody, Fs)
+%soundsc(melody, Fs)
 
 
 end
