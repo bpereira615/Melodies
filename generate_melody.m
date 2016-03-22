@@ -58,6 +58,9 @@ for n = notes
 
     y = sin(freq*2*pi*t);
     
+    %separate notes
+    y(1, end-9:end) = 0;
+    
     %plot the first note
     if (i == 1)
         figure;
@@ -93,4 +96,3 @@ audiowrite(outfile, melody, Fs);
 
 
 end
-

@@ -36,7 +36,7 @@ Ts = 1/Fs;
 load (filename);
 
 %duration of a unit note length (default - 0.5)
-noteLength = 0.5;
+noteLength = 0.25;
 
 
 
@@ -64,6 +64,9 @@ for n = notes
     
     %first harmonic
     y = sin(freq*2*pi*t);
+    
+    %separate notes
+    y(1, end-9:end) = 0;
     
     k = 2;
     while k <= 4
