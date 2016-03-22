@@ -58,8 +58,9 @@ for n = notes
 
     y = sin(freq*2*pi*t);
     
-    %separate notes
-    y(1, end-9:end) = 0;
+    %separate notes by removing samples at end,
+    %arbitrary value chosen based on what sounds correct
+    y(1, end-30:end) = 0;
     
     %plot the first note
     if (i == 1)

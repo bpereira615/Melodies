@@ -35,7 +35,7 @@ Ts = 1/Fs;
 load (filename);
 
 %duration of a unit note length (default - 0.5)
-noteLength = 0.25;
+noteLength = 0.5;
 
 
 
