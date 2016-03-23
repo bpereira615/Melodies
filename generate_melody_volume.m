@@ -80,13 +80,22 @@ for n = notes
     enrich = [a d s r];
     %
     
+    
     %plot the first note
     if (i == 1)
         figure;
-        hold on;grid on   
-        title('generate melody volume: First Note') 
+        subplot(3,1,1);
+        plot(t, enrich, '-b')
+        title('generate-melody-volume: ADSR Envelope') 
         xlabel('Time (sec)')
+        ylabel('Amp')
+        
+        subplot(3,1,2);
         plot(t, y.*enrich, '-b')
+        title('generate-melody-volume: First Note') 
+        xlabel('Time (sec)')
+        ylabel('Amp')
+        
     end
     
     melody(1, timeMark:timeMark + size(t, 2) - 1) = y.* enrich;
@@ -102,11 +111,13 @@ end
 %soundsc(melody, Fs);
 tTotal = 0:Ts:totalSec;
 %plot(tTotal, melody(1, 1:1.5*Fs + 1));
-figure;
-hold on;grid on   
-title('generate melody volume: Melody') 
-xlabel('Time (sec)')
+
+subplot(3,1,3); 
 plot(tTotal, melody, '-b')
+title('generate-melody-volume: Melody') 
+xlabel('Time (sec)')
+ylabel('Amp')
+
 
 
 

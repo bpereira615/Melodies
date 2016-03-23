@@ -67,10 +67,11 @@ for n = notes
     %plot the first note
     if (i == 1)
         figure;
-        hold on;grid on   
-        title('generate melody: First Note') 
-        xlabel('Time (sec)')
+        subplot(2,1,1); 
         plot(t, y, '-b')
+        title('generate-melody: First Note') 
+        xlabel('Time (sec)')
+        ylabel('Amp')
     end
     
     melody(1, timeMark:timeMark + size(t, 2) - 1) = y;
@@ -85,12 +86,13 @@ end
 
 %soundsc(melody, Fs);
 tTotal = 0:Ts:totalSec;
-%plot(tTotal, melody(1, 1:1.5*Fs + 1));
-figure;
-hold on;grid on   
-title('generate melody: Melody') 
-xlabel('Time (sec)')
+
+subplot(2,1,2); 
 plot(tTotal, melody, '-b')
+title('generate-melody: Melody') 
+xlabel('Time (sec)')
+ylabel('Amp')
+
 
 outfile = strcat(filename(1:7), '.wav');
 audiowrite(outfile, melody, Fs);
