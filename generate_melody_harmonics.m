@@ -5,12 +5,14 @@
 %   Project 1
 %       Part 3 - Melody Enrichment (Harmonics)
 
-function [] = generate_melody_harmonics( filename )
+function [] = generate_melody_harmonics(filename, playbackSpeed)
 %generate_melody_volume - creates a melody from an array of notes 
 %   and durations. The function takes in the name of a .mat file 
 %   (containing a notes and score array), generates the corresonding 
 %   melody and adds harmonic enrichment, and saves the output melody 
-%   as a .wav file.
+%   as a .wav file. PlaybackSpeed multiplyer controls the speed of the
+%   melody by alterning the time duration for each note in seconds (default
+%   is 0.25 seconds).
 
 
 
@@ -36,7 +38,7 @@ Ts = 1/Fs;
 load (filename);
 
 %duration of a unit note length (default - 0.5)
-noteLength = 0.5;
+noteLength = 0.25 / playbackSpeed;
 
 
 

@@ -5,11 +5,13 @@
 %   Project 1
 %       Part 1 - Melody Creation
 
-function [] = generate_melody(filename)
+function [] = generate_melody(filename, playbackSpeed)
 %generate_melody - creates a melody from an array of notes and durations
 %   The function takes in the name of a .mat file (containing a notes
 %   and score array), generates the corresonding melody, and saves the
-%   output melody as a .wav file.
+%   output melody as a .wav file. PlaybackSpeed multiplyer controls the 
+%   speed of the melody by alterning the time duration for each note in 
+%   seconds (default is 0.25 seconds).
 
 %the set of notes
 noteSet = {'A3', 'B3b', 'B3', 'C3', 'D3b', 'D3', 'E3b', 'E3', 'F3', 'G3b', 'G3', 'A4b',...
@@ -33,7 +35,7 @@ Ts = 1/Fs;
 load(filename);
 
 %duration of a unit note length (default - 0.5)
-noteLength = 0.5;
+noteLength = 0.25 / playbackSpeed;
 
 
 
