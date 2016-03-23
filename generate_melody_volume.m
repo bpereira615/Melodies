@@ -121,7 +121,15 @@ ylabel('Amp')
 
 
 
-outfile = strcat(filename(1:7), 'ADSR.wav');
+%change filename based on playback
+outfile = '';
+if (playbackSpeed > 1)
+    outfile = strcat(filename(1:7), 'FasterADSR.wav');
+elseif (playbackSpeed < 1)
+    outfile = strcat(filename(1:7), 'SlowerADSR.wav');        
+else
+    outfile = strcat(filename(1:7), 'ADSR.wav');
+end
 audiowrite(outfile, melody, Fs);
 
 %soundsc(melody, Fs)

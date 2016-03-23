@@ -94,7 +94,16 @@ xlabel('Time (sec)')
 ylabel('Amp')
 
 
-outfile = strcat(filename(1:7), '.wav');
+%change filename based on playback
+outfile = '';
+if (playbackSpeed > 1)
+    outfile = strcat(filename(1:7), 'Faster.wav');
+elseif (playbackSpeed < 1)
+    outfile = strcat(filename(1:7), 'Slower.wav');        
+else
+    outfile = strcat(filename(1:7), '.wav');
+end
+
 audiowrite(outfile, melody, Fs);
 
 %soundsc(melody, Fs)
