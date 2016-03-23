@@ -99,7 +99,6 @@ for n = notes
     end
     
     melody(1, timeMark:timeMark + size(t, 2) - 1) = y.* enrich;
-
     
     %updates counter for index in score array
     i = i + 1;
