@@ -67,9 +67,7 @@ for n = notes
     %first harmonic
     y = sin(freq*2*pi*t);
     
-    %separate notes by removing samples at end,
-    %arbitrary value chosen based on what sounds correct
-    y(1, end-30:end) = 0;
+
     
     k = 2;
     while k <= 4
@@ -79,6 +77,9 @@ for n = notes
 
     y = y / max(abs(y));
     
+    %separate notes by removing samples at end,
+    %arbitrary value chosen based on what sounds correct
+    y(1, end-30:end) = 0;
     
     %plot the first note
     if (i == 1)        
